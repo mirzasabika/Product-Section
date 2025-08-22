@@ -1,13 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/data/products";
 import { currency } from "@/lib/format";
 import { AddButton } from "./parts";
+import { Suspense } from "react";
 
-export function generateStaticParams() { return products.map(p => ({ id: p.id })); }
+export function generateStaticParams() {
+  return products.map((p) => ({ id: p.id }));
+}
 
-export default function ProductDetail({ params }: { params: { id: string }}) {
-  const p = products.find(x => x.id === params.id);
+export default function ProductDetail({ params }: { params: { id: string } }) {
+  const p = products.find((x) => x.id === params.id);
   if (!p) return <div className="card">Product not found</div>;
 
   return (
@@ -26,7 +31,10 @@ export default function ProductDetail({ params }: { params: { id: string }}) {
           <div><span className="font-medium">Brand:</span> {p.brand}</div>
         </div>
         <div className="mt-6 flex gap-3">
-          <AddButton id={p.id} />
+          {/*  Wrap AddButton with Suspense in case it uses useSearchParams */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <AddButton id={p.id} />
+          </Suspense>
           <Link href="/" className="btn-outline">Back to Listing</Link>
         </div>
       </div>

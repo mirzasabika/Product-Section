@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { Search, ShoppingCart } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useCart } from "./cart/CartContext"; // ✅ import your cart context
+import { useState, useEffect, Suspense } from "react";
+import { useCart } from "./cart/CartContext";
 
-export default function Header() {
-  const { state } = useCart(); // ✅ get cart state
-  const cartQty = state.items.reduce((a, b) => a + b.qty, 0); // ✅ dynamic qty
+// --- Content component that actually uses search params ---
+function HeaderContent() {
+  const { state } = useCart();
+  const cartQty = state.items.reduce((a, b) => a + b.qty, 0);
 
   const router = useRouter();
   const params = useSearchParams();
@@ -81,5 +82,14 @@ export default function Header() {
         </form>
       </div>
     </header>
+  );
+}
+
+// --- Export with Suspense wrapper ---
+export default function Header() {
+  return (
+    <Suspense fallback={<div className="p-4">Loading header...</div>}>
+      <HeaderContent />
+    </Suspense>
   );
 }

@@ -1,14 +1,15 @@
 "use client";
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { Filter, X } from "lucide-react";
 
 const categories = ["All", "Electronics", "Clothing", "Home"] as const;
 const brands = ["All", "Clothing", "Other"] as const;
 
-export default function FiltersSidebar() {
-  const router = useRouter();
+function SidebarContent(){
+
+   const router = useRouter();
   const params = useSearchParams();
   const pathname = usePathname();
 
@@ -194,4 +195,13 @@ export default function FiltersSidebar() {
       </div>
     </>
   );
+
+}
+
+export default function FiltersSidebar() {
+   return (
+     <Suspense fallback={<div className="p-4">Loading header...</div>}>
+       <SidebarContent></SidebarContent>
+     </Suspense>
+   );
 }
