@@ -1,21 +1,36 @@
-# Whatbytes Frontend Assignment
+# Product Section
 
-Next.js (App Router) + Tailwind implementation that matches the provided UI.
+A modern e-commerce frontend built with **Next.js 13, React, and TailwindCSS**.  
+Includes a responsive header, search, filters, and a cart with global state.
 
-## Run locally
+Deployed seamlessly on **Vercel**.
 
-```bash
-npm install
-npm run dev
-```
+ Live Demo: https://product-section.vercel.app/
+
+---
 
 ## Features
-- Product Listing with filters (category, price slider, brand), URL-synced
-- Search in header (query param `?q=`)
-- Product detail page `/product/[id]`
-- Cart page with client-side state, persisted to localStorage
-- Responsive grid (3 / 2 / 1 columns)
-- Tailwind styling and lucide-react icons
+- Responsive **header** (Logo left, Search + Cart right)
+- **Search** with query params
+- **Cart** with global Context API (item count badge)
+- **Filters sidebar** for category, brand & price
+- Fully **responsive design**
 
-## Deploy
-Deploy to Vercel. Add the repo URL in this README after deploy.
+---
+
+## Tech Stack
+- Next.js 13 (App Router)
+- React
+- TailwindCSS
+- Lucide Icons
+- Context API
+
+---
+
+## Getting Started
+```bash
+git clone https://github.com/your-username/ecommerce-frontend.git
+cd ecommerce-frontend
+npm install
+npm run dev
+
